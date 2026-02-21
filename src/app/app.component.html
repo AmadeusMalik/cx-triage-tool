@@ -1,0 +1,29 @@
+<div class="dashboard-container">
+  <header>
+    <h2>Support-to-Engineering Bridge</h2>
+  </header>
+
+  <main>
+    <div class="input-section">
+      <label>Paste Customer Feedback:</label>
+      <textarea [(ngModel)]="customerComplaint"
+        placeholder="e.x. My checkout button is disappearing on mobile..."></textarea>
+      <button (click)="processTicket()" [disabled]="isProcessing">
+  {{ isProcessing ? 'Syncing to Database...' : 'Generate Triage Report' }}</button>
+  <div *ngIf="showToast" class="toast">
+  ✅ Ticket synced to Supabase PostgreSQL
+</div>
+    </div>
+
+    <div class="output-grid" *ngIf="refinedResponse">
+      <div class="card">
+        <h3>Customer-Facing (Empathetic)</h3>
+        <p class="response-text">{{ refinedResponse }}</p>
+      </div>
+      <div class="card dark">
+        <h3>Internal Developer JSON</h3>
+        <pre>{{ engineerTicket }}</pre>
+      </div>
+    </div>
+  </main>
+</div>
